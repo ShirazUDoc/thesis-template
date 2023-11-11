@@ -1,271 +1,160 @@
-%% تنظیم فاصله ی حاشیه صفحات
-\RequirePackage[paperheight=235mm, paperwidth=165mm, top=20mm, bottom=20mm, left=20mm, right=25mm, includeheadfoot]{geometry}
-
-%% لیست تمامی پکیج های لازم
-\RequirePackage{amsmath}
+\RequirePackage{caption}
 \RequirePackage{color}
+\RequirePackage{emptypage}
 \RequirePackage{enumitem}
 \RequirePackage{fancyhdr}
+\RequirePackage[perpage, bottom]{footmisc}
+\RequirePackage{geometry}
 \RequirePackage{graphicx}
-\RequirePackage{hyperref}
-\RequirePackage[numbers]{natbib}
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage[numbers,sort&compress,sectionbib]{natbib}
+\RequirePackage{setspace}
 \RequirePackage{titlesec}
 \RequirePackage{tocloft}
 \RequirePackage{xepersian}
 
-% \usepackage[fleqn]{amsmath}
-% \setlength{\mathindent}{0pt}
+%% تنظیم فاصله ی حاشیه صفحات
+\geometry{paperheight=235mm, paperwidth=165mm, margin=20mm, right=25mm, marginparsep=0pt, asymmetric, includeheadfoot}
 
-% \usepackage[font=small]{caption}
-% \usepackage{amssymb,amsthm}
-% \usepackage{mdwmath}
-% \usepackage{blindtext}
-% \usepackage{float}
-% \usepackage[noadjust]{cite}
-% \RequirePackage[pages=some,scale=1,angle=0,opacity=0.7]{background}
-% \RequirePackage[placement=center,scale=1,angle=0]{background}
-% \usepackage{lipsum}
-% \usepackage{titletoc}
-% \usepackage[hidelinks]{hyperref}
-% \usepackage{hhline}
-% \usepackage{changepage}
-
-% \newcommand\backgroundimage[2][scale=1]{
-%     \backgroundsetup{
-%         contents={\includegraphics[#1]{#2}}
-%     }
-%     \BgThispage
-% }
-
-%شکستن فرمول های بین دو صفحه
-% \allowdisplaybreaks
-
+%% تنضیمات مربوط به فونت
 \settextfont[Scale=1.2, Path=fonts/, BoldFont=B Nazanin Bold]{B Nazanin}
 \setlatintextfont[Scale=1, Path=fonts/, BoldFont=Times New Roman Bold]{Times New Roman}
 
-% \renewcommand{\labelitemi}{$\bullet$}
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-% چنانچه می‌خواهید اعداد در فرمول‌ها، انگلیسی باشد، خط زیر را غیرفعال کنید.
-%
-% \setdigitfont[Scale=1.4,Path=Fonts/,BoldFont=Yas Bd.ttf]{Yas.ttf}%%Yas
-%%%%%%%%%%%%%%%%%%%%%%%%%%
-% تعریف قلم‌های فارسی اضافی برای استفاده در بعضی از قسمت‌های متن
-% \defpersianfont\nastaliq[Scale=2,Path=Fonts/]{IranNastaliq.ttf}
-% \defpersianfont\chapternumber[Scale=3,Path=Fonts/,BoldFont=B Nazanin Bold.ttf]{B Nazanin.ttf}
-%\chapterfont{\centering}%
-%%%%%%%%%%%%%%%%
-% تنظیم فونت متن اصلی + لاتین
-%\settextfont[Scale=1.4]{B Nazanin}
-%\setlatintextfont[Scale=1]{Times New Roman}
-%\defpersianfont\Titr[Scale=1]{B Titr Bold}
-%\defpersianfont\FehrestSec[Scale=1.4]{Zar}
-%\defpersianfont\Fontfootfa[Scale=0.8]{B Nazanin}
-%\deflatinfont\FontfootEn[Scale=5.8]{Times New Roman}
-
-%\deflatinfont\FontFaRef[Scale=1.245]{B Nazanin}
-%\defpersianfont\Fonta[Scale=1.2]{B Nazanin}
-%\defpersianfont\Fontb[Scale=1.3]{B Nazanin}
-%\defpersianfont\Fontc[Scale=1.4]{B Nazanin}
-%\defpersianfont\Fontd[Scale=1.5]{B Nazanin}
-%\defpersianfont\Fonte[Scale=1.6]{B Nazanin}
-%\defpersianfont\Fontf[Scale=1.7]{B Nazanin}
-%\defpersianfont\Fontg[Scale=1.8]{B Nazanin}
-
-%\deflatinfont\FontEnRef[Scale=1.04]{Times New Roman}
-%\deflatinfont\FontEna[Scale=1.2]{Times New Roman}
-%\deflatinfont\FontEnb[Scale=1.3]{Times New Roman}
-%\deflatinfont\FontEnc[Scale=1.4]{Times New Roman}
-%\deflatinfont\FontEnd[Scale=1.5]{Times New Roman}
-%\deflatinfont\FontEne[Scale=1.6]{Times New Roman}
-%\deflatinfont\FontEnf[Scale=1.7]{Times New Roman}
 
 %% تنظیم پاراگراف بندی ها
-% \usepackage{parskip}
-% \usepackage{indentfirst}
-\RequirePackage{setspace}
 \doublespacing
-% \setlength{\parindent}{0.7cm}
-% \renewcommand\baselinestretch{2}
 
 %% صفحه خالی
 \RequirePackage{afterpage}
 \newcommand\blankpage{
     \null
     \thispagestyle{empty}
-	\addtocounter{page}{-1}
-	\newpage
- }
- 
+    \newpage}
+
 %% صفحه بسم الله
 \newcommand\bismillah{
-	\newpage
-	\thispagestyle{empty}
-	\vspace*{\fill}
-	\begin{center}
-		\includegraphics[width=0.8\textwidth]{images/bismillah.jpg}
-	\end{center}
+    \newpage
+    \thispagestyle{empty}
     \vspace*{\fill}
-}
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{images/bismillah.jpg}
+    \end{center}
+    \vspace*{\fill}}
 
 %% سایز عنوان فهرست ها
+\setlength\cftbeforechapskip{\baselineskip}
 \renewcommand{\cfttoctitlefont}{\hfil\bfseries}
 \setlength\cftaftertoctitleskip{0pt}
-\setlength\cftbeforetoctitleskip{0pt}
-\addtocontents{toc}{\textbf{عنوان} \hfill \textbf{صفحه}}
+\setlength\cftbeforetoctitleskip{-1.55em}
+\addtocontents{toc}{\protect\vspace{\baselineskip}\textbf{عنوان}\hfill\textbf{صفحه}}
 
 \renewcommand{\cftlottitlefont}{\hfil\bfseries}
 \setlength\cftafterlottitleskip{0pt}
-\setlength\cftbeforelottitleskip{0pt}
-\addtocontents{lot}{\textbf{عنوان} \hfill \textbf{صفحه}}
+\setlength\cftbeforelottitleskip{-1.55em}
+\addtocontents{lot}{\protect\vspace{\baselineskip}\textbf{عنوان}\hfill\textbf{صفحه}\vspace{\baselineskip}}
 
 \renewcommand{\cftloftitlefont}{\hfil\bfseries}
 \setlength\cftafterloftitleskip{0pt}
-\setlength\cftbeforeloftitleskip{0pt}
-\addtocontents{lof}{\textbf{عنوان} \hfill \textbf{صفحه}}
+\setlength\cftbeforeloftitleskip{-1.55em}
+\addtocontents{lof}{\protect\vspace{\baselineskip}\textbf{عنوان}\hfill\textbf{صفحه}\vspace{\baselineskip}}
 
 %% دستورات اضافه کردن کلمه فصل به ابتدای شماره فصل در فهرست
-% \makeatletter 
-% \let\orig@chapter\@chapter
-% \def\@chapter[#1]#2{
-% % \ifnum \c@secnumdepth >\m@ne
-% 	\if@mainmatter
-% 	\refstepcounter{chapter}%
-% 	\addcontentsline{toc}{chapter}{\chaptername~\tartibi{chapter}: #1}%
-% 	% \else
-% 	% \addcontentsline{toc}{chapter}{#1}%
-% 	% \fi
-% 	\else 
-% 	\addcontentsline{toc}{chapter}{#1}%
-% 	\fi
-% 	\chaptermark{#1}%
-% 	\addtocontents{lof}{\protect\addvspace{10\p@}}%
-% 	\addtocontents{lot}{\protect\addvspace{10\p@}}%
-% 	\if@twocolumn
-% 	\@topnewpage[\@makechapterhead{#2}]%
-% 	\else 
-% 	\@makechapterhead{#2}%
-% 	\@afterheading
-% 	\fi}
- % \makeatother
-\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\let\orig@chapter\@chapter
+\def\@chapter[#1]#2{
+    \ifnum \c@secnumdepth >\m@ne
+    \if@mainmatter
+    \refstepcounter{chapter}
+    \addcontentsline{toc}{chapter}{\chaptername~\tartibi{chapter}: #1}
+    \else
+    \addcontentsline{toc}{chapter}{#1}
+    \fi
+    \chaptermark{#1}
+    \addtocontents{lof}{\protect\addvspace{10\p@}}
+    \addtocontents{lot}{\protect\addvspace{10\p@}}
+    \if@twocolumn
+    \@topnewpage[\@makechapterhead{#2}]
+    \else
+    \@makechapterhead{#2}
+    \@afterheading
+    \fi}
+
+%% استفاده از خط فاصله به جای نقطه در شماره گذاری سکشن ها
+\SepMark{-}
+\renewcommand{\cftsecaftersnum}{\@SepMark}
+\renewcommand{\cftsubsecaftersnum}{\@SepMark}
+\renewcommand{\cftsubsubsecaftersnum}{\@SepMark}
+
+%% افزودن کلمه شکل به اول موارد موجود در لیست تصاویر و جداول
+\setlength{\cfttabindent}{0pt}
+\renewcommand{\cfttabpresnum}{جدول }
+\settowidth{\cfttabnumwidth }{جدول 20\quad }
+\renewcommand{\cfttabaftersnum}{\@SepMark}
+
+\setlength{\cftfigindent}{0pt}
+\renewcommand{\cftfigpresnum}{شکل }
+\settowidth{\cftfignumwidth}{شکل 20\quad }
+\renewcommand{\cftfigaftersnum}{\@SepMark}
+
+%% نمایش خط فاصله در کپشن ها و لیست ها
+\setlist{label=\arabic*-, nosep, left=0pt}
+\DeclareCaptionLabelSeparator{dash}{- }
+\captionsetup{font=small,labelsep=dash}
+
+%% لیست نشانه های اختصاری
+\newcommand\gloss[2]{{#1}~\dotfill~{#2}\\}
+
+%% تنظیمات نقطه چین
+\renewcommand{\dotfill}{\leavevmode\cleaders\hbox to 2pt{\hss.\hss}\hfill\kern0pt}
+\renewcommand{\cftdotsep}{\cftdot}
+\renewcommand{\cftchapdotsep}{\cftdot}
 
 %% وسط چین شماره گذاری فصل و نحوه نمایش آن
 \titleformat{\chapter}[display]{\Large\bfseries\centering}{\thispagestyle{empty}\chaptername~\tartibi{chapter}}{10pt}{\Large}
 \titlespacing*{\chapter}{0pt}{60pt}{40pt}
- 
-% % تنظیمات محل قرار گیری سکشن و ساب سکشن در فهرست مطالب
-% \renewcommand*\l@section{\@dottedtocline{1}{1em}{2em}}
-% \renewcommand*\l@subsection{\@dottedtocline{2}{1.75em}{2.75em}}
-
-
-% \makeatletter
-% \renewcommand{\@pnumwidth}{0em}% 1.55em
-% \makeatother
-
-%% استفاده از خط فاصله به جای نقطه در شماره گذاری سکشن ها
-\SepMark{-}
-\renewcommand{\cftsecaftersnum}{\@SepMark}                                                        
-\renewcommand{\cftsubsecaftersnum}{\@SepMark}                                                      
-\renewcommand{\cftsubsubsecaftersnum}{\@SepMark}
 
 %% تنظیم فونت سکشن ها
 \titleformat{\section}{\normalsize\bfseries}{\thesection\@SepMark~}{0pt}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection\@SepMark~}{0pt}{}
 
-%%تنظیمات خط در سربرگ
-% \renewcommand\headrule{
-% \begin{minipage}{1\textwidth}
-% \hrule width \hsize height 2pt \kern 0.5mm \hrule width \hsize 
-% \end{minipage}}%
-
-%% افزودن کلمه شکل به اول موارد موجود در لیست تصاویر و جداول     
-\setlength{\cfttabindent}{0pt} 
-\renewcommand{\cfttabpresnum}{جدول }                                    
-\settowidth{\cfttabnumwidth }{جدول 20\quad }                                                        
-\renewcommand{\cfttabaftersnum}{\@SepMark}    
-
-\setlength{\cftfigindent}{0pt}                                                                      
-\renewcommand{\cftfigpresnum}{شکل }                                                                 
-\settowidth{\cftfignumwidth}{شکل 20\quad }                                                         
-\renewcommand{\cftfigaftersnum}{\@SepMark}    
-
-%% لیست نشانه های اختصاری
-\newcommand\gloss[2]{#1 \hfill #2 \\}
-% \newcommand\englishgloss[2]{
-% \begin{latin}
-% \begin{tabular}{ p{2cm} p{8cm} }
-% \lr{#1} & \lr{#2}
-% \end{tabular}
-% \end{latin}
-% }
-
-%%  تنظیم فونت در فرمول ها
-% \DeclareMathSizes{10}{13}{9}{8}
-
-% \usepackage{titlesec}
-% \titlespacing*{\section}
-% {0pt}{5.5ex plus 1ex minus .2ex}{4.3ex plus .2ex}
-
-
-
-%% رفرنس به فصلها و بخش ها و استفاده از نام آن فصل و ...
-% \let\Chaptermark\chaptermark
-% \def\chaptermark#1{\def\Chaptername{#1}\Chaptermark{#1}}
-% \let\Sectionmark\sectionmark
-% \def\sectionmark#1{\def\Sectionname{#1}\Sectionmark{#1}}
-% \let\Subsectionmark\subsectionmark
-% \def\subsectionmark#1{\def\Subsectionname{#1}\Subsectionmark{#1}}
-% \let\Subsubsectionmark\subsubsectionmark
-% \def\subsubsectionmark#1{\def\Subsubsectionname{#1}\Subsubsectionmark{#1}}
-
-
-%% مراجع به صورت سکشن
-% \makeatletter
-% \renewenvironment{thebibliography}[1]
-% {\@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
-% 	\list{\@biblabel{\@arabic\c@enumiv}}%
-% 	{\settowidth\labelwidth{\@biblabel{#1}}%
-% 		\leftmargin\labelwidth
-% 		\advance\leftmargin\labelsep
-% 		\@openbib@code
-% 		\usecounter{enumiv}%
-% 		\let\p@enumiv\@empty
-% 		\renewcommand\theenumiv{\@arabic\c@enumiv}}%
-% 	\sloppy
-% 	\clubpenalty4000
-% 	\@clubpenalty \clubpenalty
-% 	\widowpenalty4000%
-% 	\sfcode`\.\@m}
-% {\def\@noitemerr
-% 	{\@latex@warning{Empty `thebibliography' environment}}%
-% 	\endlist}
-% \makeatother
-
-%% گذاشتن - بین رفرنس های گروهی
-% \renewcommand*{\citedash}{\hbox{-}\penalty\citepunctpenalty}
-
-%% فاصله بین فوت نوت و متن
-% \makeatletter
-% \patchcmd{\@footnotetext}{\rule}{1\rule}{}{}
-% \makeatother
-
-%% ریست شماره فوت نوت ها در هر پیج
-\RequirePackage[perpage, bottom]{footmisc}
-% \usepackage{perpage} 
-% \MakePerPage{footnote}
-% \setlength{\footnotemargin}{5pt}
-% % تنظیم فونت و سایز فونت نوت
-% \renewcommand{\footnotesize}{\small}
-
 %% تنظیمات هدر و فوتر
 \fancyhf{}
 \fancyfoot[C]{\thepage}
 \fancyhead[ER]{\leftmark}
-\fancyhead[EL]{{\typeFA} \levelFA}
-\fancyhead[OR]{\titleFA}                       
+\fancyhead[EL]{{\persiantype} \persiandegree}
+\fancyhead[OR]{\persiantitle}
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername~\tartibi{chapter}: #1}{}}
 
-%% تنضیمات لیست
-\setlist{label=\arabic*-, nosep, left=0pt}
+%%  استایل منابع
+\bibliographystyle{chicago-fa}
 
-\renewcommand{\dotfill}{\leavevmode\cleaders\hbox to 2pt{\hss.\hss}\hfill\kern0pt}
+%% کامندهای مربوط به اطلاعات پایان نامه
+\newcommand{\name}[2]{\newcommand{\persianname}{#1}\newcommand{\latinname}{#2}}
+\newcommand{\studentnumber}[1]{\newcommand{\persianstudentnumber}{#1}\newcommand{\latinstudentnumber}{#1}}
+
+\newcommand{\university}[2]{\newcommand{\persianuniversity}{#1}\newcommand{\latinuniversity}{#2}}
+\newcommand{\department}[2]{\newcommand{\persiandepartment}{#1}\newcommand{\latindepartment}{#2}}
+\newcommand{\field}[2]{\newcommand{\persianfield}{#1}\newcommand{\latinfield}{#2}}
+\newcommand{\degree}[2]{\newcommand{\persiandegree}{#1}\newcommand{\latindegree}{#2}}
+
+\newcommand{\thesistitle}[2]{\newcommand{\persiantitle}{#1}\newcommand{\latintitle}{#2}}
+\newcommand{\thesisdate}[2]{\newcommand{\persiandate}{#1}\newcommand{\latindate}{#2}}
+\newcommand{\thesisgrade}[2]{\newcommand{\persiangrade}{#1}\newcommand{\latingrade}{#2}}
+\newcommand{\thesistype}[2]{\newcommand{\persiantype}{#1}\newcommand{\latintype}{#2}}
+\newcommand{\defensedate}[2]{\newcommand{\persiandefensedate}{#1}\newcommand{\latindefensedate}{#2}}
+
+\newcommand{\supervisor}[2]{\newcommand{\persiansupervisor}{#1}\newcommand{\latinsupervisor}{#2}}
+\newcommand{\supervisortitle}[2]{\newcommand{\persiansupervisortitle}{#1}\newcommand{\latinsupervisortitle}{#2}}
+\newcommand{\supervisordepartment}[2]{\newcommand{\persiansupervisordepartment}{#1}\newcommand{\latinsupervisordepartment}{#2}}
+
+\newcommand{\advisor}[2]{\newcommand{\persianadvisor}{#1}\newcommand{\latinadvisor}{#2}}
+\newcommand{\advisortitle}[2]{\newcommand{\persianadvisortitle}{#1}\newcommand{\latinadvisortitle}{#2}}
+\newcommand{\advisordepartment}[2]{\newcommand{\persianadvisordepartment}{#1}\newcommand{\latinadvisordepartment}{#2}}
+
+\newcommand{\referee}[2]{\newcommand{\persianreferee}{#1}\newcommand{\latinreferee}{#2}}
+\newcommand{\refereetitle}[2]{\newcommand{\persianrefereetitle}{#1}\newcommand{\latinrefereetitle}{#2}}
+\newcommand{\refereedepartment}[2]{\newcommand{\persianrefereedepartment}{#1}\newcommand{\latinrefereedepartment}{#2}}
+
+\newcommand{\externalreferee}[2]{\newcommand{\persianexternalreferee}{#1}\newcommand{\latinexternalreferee}{#2}}
+\newcommand{\externalrefereetitle}[2]{\newcommand{\persianexternalrefereetitle}{#1}\newcommand{\latinexternalrefereetitle}{#2}}
+\newcommand{\externalrefereedepartment}[2]{\newcommand{\persianexternalrefereedepartment}{#1}\newcommand{\latinexternalrefereedepartment}{#2}}
+\newcommand{\externalrefereeuniversity}[2]{\newcommand{\persianexternalrefereeuniversity}{#1}\newcommand{\latinexternalrefereeuniversity}{#2}}
