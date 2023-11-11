@@ -1,0 +1,55 @@
+\documentclass[10pt]{book}
+
+\usepackage{shirazu}
+
+\begin{document}
+
+\renewcommand{\bibname}{{\large منابع}\vspace{\baselineskip}}
+\renewcommand{\listfigurename}{فهرست شکل‌ها}
+\renewcommand{\listtablename}{فهرست جدول‌ها}
+
+\pagenumbering{alph}
+\setcounter{page}{1}
+
+\pagestyle{empty}
+\include{frontmatter/titlepage}
+\blankpage
+\bismillah
+\include{frontmatter/authenticity}
+\include{frontmatter/referees}
+\include{frontmatter/dedication}
+\include{frontmatter/acknowledgement}
+
+\pagestyle{plain}
+\include{frontmatter/abstract}
+\tableofcontents
+\clearpage
+\listoftables
+\clearpage
+\listoffigures
+\include{frontmatter/abbreviations}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\pagestyle{fancy}
+\include{chapters/chapter1}
+\include{chapters/chapter2}
+\include{chapters/chapter3}
+\include{chapters/chapter4}
+\include{chapters/chapter5}
+
+\pagestyle{plain}
+\addcontentsline{toc}{chapter}{\bibname}
+\bibliography{references}
+% \include{references}
+\include{chapters/appendix}
+
+\newgeometry{margin=20mm, left=25mm, asymmetric}
+\pagestyle{empty}
+\include{backmatter/abstract}
+\include{backmatter/referees}
+\blankpage
+\include{backmatter/titlepage}
+
+\end{document}
