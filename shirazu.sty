@@ -1,9 +1,8 @@
+\RequirePackage{appendix}
 \RequirePackage{caption}
-\RequirePackage{color}
 \RequirePackage{emptypage}
 \RequirePackage{enumitem}
 \RequirePackage{fancyhdr}
-\RequirePackage[perpage, bottom]{footmisc}
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 \RequirePackage[hidelinks]{hyperref}
@@ -12,6 +11,7 @@
 \RequirePackage{titlesec}
 \RequirePackage{tocloft}
 \RequirePackage{xepersian}
+\RequirePackage[perpage, bottom]{footmisc}
 
 %% تنظیم فاصله ی حاشیه صفحات
 \geometry{paperheight=235mm, paperwidth=165mm, margin=20mm, right=25mm, marginparsep=0pt, asymmetric, includeheadfoot}
@@ -20,19 +20,17 @@
 \settextfont[Scale=1.2, Path=fonts/, BoldFont=B Nazanin Bold]{B Nazanin}
 \setlatintextfont[Scale=1, Path=fonts/, BoldFont=Times New Roman Bold]{Times New Roman}
 
-
 %% تنظیم پاراگراف بندی ها
 \doublespacing
 
 %% صفحه خالی
-\RequirePackage{afterpage}
-\newcommand\blankpage{
+\newcommand{\blankpage}{
     \null
     \thispagestyle{empty}
     \newpage}
 
 %% صفحه بسم الله
-\newcommand\bismillah{
+\newcommand{\bismillah}{
     \newpage
     \thispagestyle{empty}
     \vspace*{\fill}
@@ -42,26 +40,28 @@
     \vspace*{\fill}}
 
 %% سایز عنوان فهرست ها
-\setlength\cftbeforechapskip{\baselineskip}
+\setlength{\cftbeforechapskip}{\baselineskip}
 \renewcommand{\cfttoctitlefont}{\hfil\bfseries}
-\setlength\cftaftertoctitleskip{0pt}
-\setlength\cftbeforetoctitleskip{-1.55em}
-\addtocontents{toc}{\protect\vspace{\baselineskip}\textbf{عنوان}\hfill\textbf{صفحه}}
+\renewcommand{\cftaftertoctitle}{\vspace{\baselineskip}}
+\setlength{\cftaftertoctitleskip}{0pt}
+\setlength{\cftbeforetoctitleskip}{-1.55em}
+\addtocontents{toc}{\textbf{عنوان}\hfill\textbf{صفحه}\par}
 
 \renewcommand{\cftlottitlefont}{\hfil\bfseries}
-\setlength\cftafterlottitleskip{0pt}
-\setlength\cftbeforelottitleskip{-1.55em}
-\addtocontents{lot}{\protect\vspace{\baselineskip}\textbf{عنوان}\hfill\textbf{صفحه}\vspace{\baselineskip}}
+\renewcommand{\cftafterlottitle}{\vspace{\baselineskip}}
+\setlength{\cftafterlottitleskip}{0pt}
+\setlength{\cftbeforelottitleskip}{-1.55em}
+\addtocontents{lot}{\textbf{عنوان}\hfill\textbf{صفحه}\par\vspace{\baselineskip}}
 
 \renewcommand{\cftloftitlefont}{\hfil\bfseries}
-\setlength\cftafterloftitleskip{0pt}
-\setlength\cftbeforeloftitleskip{-1.55em}
-\addtocontents{lof}{\protect\vspace{\baselineskip}\textbf{عنوان}\hfill\textbf{صفحه}\vspace{\baselineskip}}
+\renewcommand{\cftafterloftitle}{\vspace{\baselineskip}}
+\setlength{\cftafterloftitleskip}{0pt}
+\setlength{\cftbeforeloftitleskip}{-1.55em}
+\addtocontents{lof}{\textbf{عنوان}\hfill\textbf{صفحه}\par\vspace{\baselineskip}}
 
 %% دستورات اضافه کردن کلمه فصل به ابتدای شماره فصل در فهرست
 \let\orig@chapter\@chapter
 \def\@chapter[#1]#2{
-    \ifnum \c@secnumdepth >\m@ne
     \if@mainmatter
     \refstepcounter{chapter}
     \addcontentsline{toc}{chapter}{\chaptername~\tartibi{chapter}: #1}
@@ -69,8 +69,6 @@
     \addcontentsline{toc}{chapter}{#1}
     \fi
     \chaptermark{#1}
-    \addtocontents{lof}{\protect\addvspace{10\p@}}
-    \addtocontents{lot}{\protect\addvspace{10\p@}}
     \if@twocolumn
     \@topnewpage[\@makechapterhead{#2}]
     \else
@@ -122,10 +120,16 @@
 \fancyhead[ER]{\leftmark}
 \fancyhead[EL]{{\persiantype} \persiandegree}
 \fancyhead[OR]{\persiantitle}
+\setlength{\headheight}{14pt}
+\addtolength{\topmargin}{-2pt}
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername~\tartibi{chapter}: #1}{}}
 
 %%  استایل منابع
 \bibliographystyle{chicago-fa}
+
+%% تنظیمات پیوست
+\renewcommand{\appendixtocname}{پیوست‌ها}
+\newcommand{\app}[1]{\protect\section[\hspace{1.5em}#1]{#1}}
 
 %% کامندهای مربوط به اطلاعات پایان نامه
 \newcommand{\name}[2]{\newcommand{\persianname}{#1}\newcommand{\latinname}{#2}}
