@@ -6,41 +6,57 @@
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 \RequirePackage[hidelinks]{hyperref}
-\RequirePackage[numbers,sort&compress,sectionbib]{natbib}
+\RequirePackage[numbers,sectionbib,sort&compress]{natbib}
 \RequirePackage{setspace}
 \RequirePackage{titlesec}
 \RequirePackage{tocloft}
 \RequirePackage{xepersian}
-\RequirePackage[perpage, bottom]{footmisc}
+\RequirePackage[bottom,flushmargin,hang,perpage]{footmisc}
+
+\SepMark{-}
+\urlstyle{same}
+
+\AtBeginDocument{
+    \renewcommand{\refname}{منابع}
+    \renewcommand{\bibname}{{\large\refname}\vspace{\baselineskip}}
+    \renewcommand{\listfigurename}{فهرست شکل‌ها}
+    \renewcommand{\listtablename}{فهرست جدول‌ها}
+}
 
 %% تنظیم فاصله ی حاشیه صفحات
-\geometry{paperheight=235mm, paperwidth=165mm, margin=20mm, right=25mm, marginparsep=0pt, asymmetric, includeheadfoot}
+\geometry{paperheight=235mm,paperwidth=165mm,margin=20mm,right=25mm,marginparsep=0pt,headsep=5pt,asymmetric,includefoot}
+\setlength{\headheight}{16pt}
 
 %% تنضیمات مربوط به فونت
-\settextfont[Scale=1.2, Path=fonts/, BoldFont=B Nazanin Bold]{B Nazanin}
-\setlatintextfont[Scale=1, Path=fonts/, BoldFont=Times New Roman Bold]{Times New Roman}
+\settextfont[Scale=1]{B Nazanin}
+\setlatintextfont[Scale=0.83]{Times New Roman}
+\DeclareMathSizes{12}{10}{7}{8}
+\setlength{\footnotesep}{0pt}
 
 %% تنظیم پاراگراف بندی ها
-\doublespacing
+\setlength{\parindent}{0pt}
+\onehalfspacing
 
 %% صفحه خالی
 \newcommand{\blankpage}{
-    \null
+    \clearpage
+    \shipout\null
     \thispagestyle{empty}
-    \newpage}
+    \clearpage
+}
 
 %% صفحه بسم الله
 \newcommand{\bismillah}{
-    \newpage
+    \clearpage
     \thispagestyle{empty}
     \vspace*{\fill}
     \begin{center}
         \includegraphics[width=0.8\textwidth]{images/bismillah.jpg}
     \end{center}
-    \vspace*{\fill}}
+    \vspace*{\fill}
+}
 
 %% سایز عنوان فهرست ها
-\setlength{\cftbeforechapskip}{\baselineskip}
 \renewcommand{\cfttoctitlefont}{\hfil\bfseries}
 \renewcommand{\cftaftertoctitle}{\vspace{\baselineskip}}
 \setlength{\cftaftertoctitleskip}{0pt}
@@ -51,55 +67,54 @@
 \renewcommand{\cftafterlottitle}{\vspace{\baselineskip}}
 \setlength{\cftafterlottitleskip}{0pt}
 \setlength{\cftbeforelottitleskip}{-1.55em}
-\addtocontents{lot}{\textbf{عنوان}\hfill\textbf{صفحه}\par\vspace{\baselineskip}}
+\addtocontents{lot}{\textbf{عنوان}\hfill\textbf{صفحه}\vspace{0.5\baselineskip}\par}
 
 \renewcommand{\cftloftitlefont}{\hfil\bfseries}
 \renewcommand{\cftafterloftitle}{\vspace{\baselineskip}}
 \setlength{\cftafterloftitleskip}{0pt}
 \setlength{\cftbeforeloftitleskip}{-1.55em}
-\addtocontents{lof}{\textbf{عنوان}\hfill\textbf{صفحه}\par\vspace{\baselineskip}}
+\addtocontents{lof}{\textbf{عنوان}\hfill\textbf{صفحه}\vspace{0.5\baselineskip}\par}
 
 %% دستورات اضافه کردن کلمه فصل به ابتدای شماره فصل در فهرست
 \let\orig@chapter\@chapter
 \def\@chapter[#1]#2{
     \if@mainmatter
-    \refstepcounter{chapter}
-    \addcontentsline{toc}{chapter}{\chaptername~\tartibi{chapter}: #1}
+        \refstepcounter{chapter}
+        \addcontentsline{toc}{chapter}{\chaptername~\tartibi{chapter}: #1}
     \else
-    \addcontentsline{toc}{chapter}{#1}
+        \addcontentsline{toc}{chapter}{#1}
     \fi
     \chaptermark{#1}
     \if@twocolumn
-    \@topnewpage[\@makechapterhead{#2}]
+        \@topnewpage[\@makechapterhead{#2}]
     \else
-    \@makechapterhead{#2}
-    \@afterheading
-    \fi}
+        \@makechapterhead{#2}
+        \@afterheading
+    \fi
+}
 
 %% استفاده از خط فاصله به جای نقطه در شماره گذاری سکشن ها
-\SepMark{-}
 \renewcommand{\cftsecaftersnum}{\@SepMark}
 \renewcommand{\cftsubsecaftersnum}{\@SepMark}
 \renewcommand{\cftsubsubsecaftersnum}{\@SepMark}
-
-%% افزودن کلمه شکل به اول موارد موجود در لیست تصاویر و جداول
-\setlength{\cfttabindent}{0pt}
-\renewcommand{\cfttabpresnum}{جدول }
-\settowidth{\cfttabnumwidth }{جدول 20\quad }
+\renewcommand{\cftfigaftersnum}{\@SepMark}
 \renewcommand{\cfttabaftersnum}{\@SepMark}
 
+%% افزودن کلمه شکل به اول موارد موجود در لیست تصاویر و جداول
+\renewcommand{\@tocrmarg}{1.55em}
+
+\renewcommand{\cfttabpresnum}{\tablename~}
+\setlength{\cfttabindent}{0pt}
+\addtolength{\cfttabnumwidth}{2.2em}
+
+\renewcommand{\cftfigpresnum}{\figurename~}
 \setlength{\cftfigindent}{0pt}
-\renewcommand{\cftfigpresnum}{شکل }
-\settowidth{\cftfignumwidth}{شکل 20\quad }
-\renewcommand{\cftfigaftersnum}{\@SepMark}
+\addtolength{\cftfignumwidth}{2em}
 
 %% نمایش خط فاصله در کپشن ها و لیست ها
-\setlist{label=\arabic*-, nosep, left=0pt}
+\setlist{left=0pt,nosep}
 \DeclareCaptionLabelSeparator{dash}{- }
 \captionsetup{font=small,labelsep=dash}
-
-%% لیست نشانه های اختصاری
-\newcommand\gloss[2]{{#1}~\dotfill~{#2}\\}
 
 %% تنظیمات نقطه چین
 \renewcommand{\dotfill}{\leavevmode\cleaders\hbox to 2pt{\hss.\hss}\hfill\kern0pt}
@@ -112,24 +127,46 @@
 
 %% تنظیم فونت سکشن ها
 \titleformat{\section}{\normalsize\bfseries}{\thesection\@SepMark~}{0pt}{}
+\titlespacing{\section}{2pc}{1.2em plus 0pt minus 0pt}{0pt}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection\@SepMark~}{0pt}{}
+\titlespacing{\subsection}{2pc}{1.2em plus 0pt minus 0pt}{0pt}
 
 %% تنظیمات هدر و فوتر
 \fancyhf{}
 \fancyfoot[C]{\thepage}
-\fancyhead[ER]{\leftmark}
-\fancyhead[EL]{{\persiantype} \persiandegree}
-\fancyhead[OR]{\persiantitle}
+\fancyhead[ER]{\textbf{\leftmark}}
+\fancyhead[EL]{\textbf{{\persiantype} {\persiandegree}}}
+\fancyhead[OR]{\textbf{\persiantitle}}
 \setlength{\headheight}{14pt}
 \addtolength{\topmargin}{-2pt}
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername~\tartibi{chapter}: #1}{}}
 
-%%  استایل منابع
-\bibliographystyle{chicago-fa}
-
 %% تنظیمات پیوست
 \renewcommand{\appendixtocname}{پیوست‌ها}
 \newcommand{\app}[1]{\protect\section[\hspace{1.5em}#1]{#1}}
+\AtBeginEnvironment{appendices}{\renewcommand{\thesection}{پیوست~\arabic{section}}}
+
+%% لیست نشانه های اختصاری
+\newcommand{\gloss}[2]{{#1}~\dotfill~{#2}\\}
+
+%% تنظیم فاصله خطوط منابع
+\let\origthebibliography\thebibliography
+\renewcommand{\thebibliography}[1]{
+    \origthebibliography{#1}
+    \setlength{\parskip}{0pt}
+    \setlength{\itemsep}{0pt plus 0.3ex}
+}
+
+%% تنضیم فاصله معادلات ریاضی
+\AtBeginDocument{
+    \setlength\abovedisplayskip{5pt}
+    \setlength\belowdisplayskip{5pt}
+    \setlength\abovedisplayshortskip{5pt}
+    \setlength\belowdisplayshortskip{5pt}
+}
+
+%%نشان دادن تصاویر در بالای صفحه خالی
+\setlength{\@fptop}{0pt}
 
 %% کامندهای مربوط به اطلاعات پایان نامه
 \newcommand{\name}[2]{\newcommand{\persianname}{#1}\newcommand{\latinname}{#2}}
@@ -162,3 +199,21 @@
 \newcommand{\externalrefereetitle}[2]{\newcommand{\persianexternalrefereetitle}{#1}\newcommand{\latinexternalrefereetitle}{#2}}
 \newcommand{\externalrefereedepartment}[2]{\newcommand{\persianexternalrefereedepartment}{#1}\newcommand{\latinexternalrefereedepartment}{#2}}
 \newcommand{\externalrefereeuniversity}[2]{\newcommand{\persianexternalrefereeuniversity}{#1}\newcommand{\latinexternalrefereeuniversity}{#2}}
+
+%% جلد فارسی و انگلیسی
+\newcommand{\frontcover}{
+    \AddToHookNext{shipout/background}{
+        \put (0,-\paperheight){
+            \includegraphics[width=\paperwidth,height=\paperheight,trim=0 0 102mm 0]{images/cover.jpg}
+        }
+    }
+    \blankpage
+}
+\newcommand{\backcover}{
+    \AddToHookNext{shipout/background}{
+        \put (0,-\paperheight){
+            \includegraphics*[width=\paperwidth,height=\paperheight,trim=115mm 0 0 0]{images/cover.jpg}
+        }
+    }
+    \blankpage
+}

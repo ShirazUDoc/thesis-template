@@ -1,4 +1,4 @@
-\documentclass[10pt]{book}
+\documentclass[12pt]{book}
 
 \usepackage{shirazu}
 
@@ -10,39 +10,35 @@
 \degree{مقطع تحصیلی}{Degree}
 
 \thesistitle{عنوان}{Title}
-\thesistype{مقاله/رساله}{Thesis/Dissertion}
+\thesistype{پایان‌نامه/رساله}{Thesis/Dissertion}
 \thesisdate{مهر ۱۴۰۲}{September 2023}
 \thesisgrade{عالی}{Excellent}
 \defensedate{1402/1/1}{1/1/2023}
 
-\supervisor{نام استاد راهنما}{Supervisor Name}
+\supervisor{نام استاد راهنما}{Supervisor Name (Ph.D.)}
 \supervisortitle{مرتبه علمی}{Prof.}
 \supervisordepartment{دانشکده}{Department}
 
-\advisor{نام استاد مشاور}{Advisor Name}
+\advisor{نام استاد مشاور}{Advisor Name (Ph.D.)}
 \advisortitle{مرتبه علمی}{Prof.}
 \advisordepartment{دانشکده}{Department}
 
-\referee{نام داور}{Referee}
+\referee{نام داور}{Referee (Ph.D.)}
 \refereetitle{مرتبه علمی}{Prof.}
 \refereedepartment{دانشکده}{Department}
 
-\externalreferee{نام داور}{Referee}
+\externalreferee{نام داور}{Referee (Ph.D.)}
 \externalrefereetitle{مرتبه علمی}{Prof.}
 \externalrefereedepartment{دانشکده}{Department}
 \externalrefereeuniversity{دانشگاه}{University}
 
 \begin{document}
 
-\renewcommand{\refname}{منابع}
-\renewcommand{\bibname}{{\large\refname}\vspace{\baselineskip}}
-\renewcommand{\listfigurename}{فهرست شکل‌ها}
-\renewcommand{\listtablename}{فهرست جدول‌ها}
-
 \pagenumbering{alph}
 \setcounter{page}{1}
 
 \pagestyle{empty}
+\frontcover
 \include{frontmatter/titlepage}
 \blankpage
 \bismillah
@@ -71,8 +67,12 @@
 \include{chapters/chapter5}
 
 \pagestyle{plain}
-\addcontentsline{toc}{chapter}{\refname}
-\bibliography{references}
+{
+    \singlespacing
+    \addcontentsline{toc}{chapter}{\refname}
+    % \bibliography{references}
+    \include{references}
+}
 \include{chapters/appendix}
 
 \newgeometry{margin=20mm, left=25mm, asymmetric}
@@ -81,5 +81,6 @@
 \include{backmatter/referees}
 \blankpage
 \include{backmatter/titlepage}
+\backcover
 
 \end{document}
