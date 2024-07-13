@@ -123,13 +123,13 @@
 
 %% وسط چین شماره گذاری فصل و نحوه نمایش آن
 \titleformat{\chapter}[display]{\Large\bfseries\centering}{\thispagestyle{empty}\chaptername~\tartibi{chapter}}{10pt}{\Large}
-\titlespacing*{\chapter}{0pt}{60pt}{40pt}
+\titlespacing*{\chapter}{0pt}{90pt}{2\baselineskip}
 
 %% تنظیم فونت سکشن ها
 \titleformat{\section}{\normalsize\bfseries}{\thesection\@SepMark~}{0pt}{}
-\titlespacing{\section}{2pc}{1.2em plus 0pt minus 0pt}{0pt}
+\titlespacing*{\section}{0pt}{\baselineskip}{0pt}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection\@SepMark~}{0pt}{}
-\titlespacing{\subsection}{2pc}{1.2em plus 0pt minus 0pt}{0pt}
+\titlespacing*{\subsection}{0pt}{\baselineskip}{0pt}
 
 %% تنظیمات هدر و فوتر
 \fancyhf{}
@@ -183,7 +183,7 @@
 \newcommand{\thesistype}[2]{\newcommand{\persiantype}{#1}\newcommand{\latintype}{#2}}
 \newcommand{\defensedate}[2]{\newcommand{\persiandefensedate}{#1}\newcommand{\latindefensedate}{#2}}
 
-\newcommand{\supervisor}[2]{\newcommand{\persiansupervisor}{#1}\newcommand{\latinsupervisor}{#2}}
+\newcommand{\supervisor}[3]{\newcommand{\persiansupervisor}{#1}\newcommand{\latinsupervisor}{#2}\newcommand{\latinsupervisorabbr}{#3}}
 \newcommand{\supervisortitle}[2]{\newcommand{\persiansupervisortitle}{#1}\newcommand{\latinsupervisortitle}{#2}}
 \newcommand{\supervisordepartment}[2]{\newcommand{\persiansupervisordepartment}{#1}\newcommand{\latinsupervisordepartment}{#2}}
 
@@ -212,7 +212,7 @@
 \newcommand{\backcover}{
     \AddToHookNext{shipout/background}{
         \put (0,-\paperheight){
-            \includegraphics*[width=\paperwidth,height=\paperheight,trim=115mm 0 0 0]{images/cover.jpg}
+            \includegraphics[width=\paperwidth,height=\paperheight,trim=115mm 0 0 0]{images/cover.jpg}
         }
     }
     \blankpage
