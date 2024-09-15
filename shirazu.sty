@@ -18,23 +18,25 @@
 
 \AtBeginDocument{
     \renewcommand{\refname}{منابع}
-    \renewcommand{\bibname}{{\large\refname}\vspace{\baselineskip}}
+    \renewcommand{\bibname}{\refname\vspace{\baselineskip}}
     \renewcommand{\listfigurename}{فهرست شکل‌ها}
     \renewcommand{\listtablename}{فهرست جدول‌ها}
 }
 
 %% تنظیم فاصله ی حاشیه صفحات
 \geometry{paperheight=235mm,paperwidth=165mm,margin=20mm,right=25mm,marginparsep=0pt,headsep=5pt,asymmetric,includefoot}
-\setlength{\headheight}{16pt}
 
 %% تنضیمات مربوط به فونت
 \settextfont[Scale=1]{B Nazanin}
 \setlatintextfont[Scale=0.83]{Times New Roman}
-\DeclareMathSizes{12}{10}{7}{8}
+\DeclareMathSizes{12}{10}{7}{6}
+\DeclareMathSizes{10.95}{9}{7}{6}
+\DeclareMathSizes{10}{8}{7}{6}
 \setlength{\footnotesep}{0pt}
 
 %% تنظیم پاراگراف بندی ها
 \setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
 \onehalfspacing
 
 %% صفحه خالی
@@ -51,7 +53,7 @@
     \thispagestyle{empty}
     \vspace*{\fill}
     \begin{center}
-        \includegraphics[width=0.8\textwidth]{images/bismillah.jpg}
+        \includegraphics[width=0.8\textwidth]{assets/bismillah.jpg}
     \end{center}
     \vspace*{\fill}
 }
@@ -76,11 +78,11 @@
 \addtocontents{lof}{\textbf{عنوان}\hfill\textbf{صفحه}\vspace{0.5\baselineskip}\par}
 
 %% دستورات اضافه کردن کلمه فصل به ابتدای شماره فصل در فهرست
-\let\orig@chapter\@chapter
+\let\original@chapter\@chapter
 \def\@chapter[#1]#2{
     \if@mainmatter
         \refstepcounter{chapter}
-        \addcontentsline{toc}{chapter}{\chaptername~\tartibi{chapter}: #1}
+        \addcontentsline{toc}{chapter}{\chaptername~\tartibi{chapter}:~#1}
     \else
         \addcontentsline{toc}{chapter}{#1}
     \fi
@@ -113,8 +115,8 @@
 
 %% نمایش خط فاصله در کپشن ها و لیست ها
 \setlist{left=0pt,nosep}
-\DeclareCaptionLabelSeparator{dash}{- }
-\captionsetup{font=small,labelsep=dash}
+\DeclareCaptionLabelSeparator{dash}{\@SepMark~}
+\captionsetup{font=footnotesize,labelsep=dash}
 
 %% تنظیمات نقطه چین
 \renewcommand{\dotfill}{\leavevmode\cleaders\hbox to 2pt{\hss.\hss}\hfill\kern0pt}
@@ -122,7 +124,7 @@
 \renewcommand{\cftchapdotsep}{\cftdot}
 
 %% وسط چین شماره گذاری فصل و نحوه نمایش آن
-\titleformat{\chapter}[display]{\Large\bfseries\centering}{\thispagestyle{empty}\chaptername~\tartibi{chapter}}{10pt}{\Large}
+\titleformat{\chapter}[display]{\fontsize{16pt}{19pt}\selectfont\bfseries\centering}{\chaptername~\tartibi{chapter}}{24pt}{\thispagestyle{empty}}
 \titlespacing*{\chapter}{0pt}{90pt}{2\baselineskip}
 
 %% تنظیم فونت سکشن ها
@@ -134,12 +136,10 @@
 %% تنظیمات هدر و فوتر
 \fancyhf{}
 \fancyfoot[C]{\thepage}
-\fancyhead[ER]{\textbf{\leftmark}}
-\fancyhead[EL]{\textbf{{\persiantype} {\persiandegree}}}
-\fancyhead[OR]{\textbf{\persiantitle}}
-\setlength{\headheight}{14pt}
+\fancyhead[R]{\textbf{\persiantitle}}
+\setlength{\headheight}{16pt}
 \addtolength{\topmargin}{-2pt}
-\renewcommand{\chaptermark}[1]{\markboth{\chaptername~\tartibi{chapter}: #1}{}}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername~\tartibi{chapter}:~#1}{}}
 
 %% تنظیمات پیوست
 \renewcommand{\appendixtocname}{پیوست‌ها}
@@ -150,19 +150,19 @@
 \newcommand{\gloss}[2]{{#1}~\dotfill~{#2}\\}
 
 %% تنظیم فاصله خطوط منابع
-\let\origthebibliography\thebibliography
+\let\originalthebibliography\thebibliography
 \renewcommand{\thebibliography}[1]{
-    \origthebibliography{#1}
+    \originalthebibliography{#1}
     \setlength{\parskip}{0pt}
     \setlength{\itemsep}{0pt plus 0.3ex}
 }
 
 %% تنضیم فاصله معادلات ریاضی
 \AtBeginDocument{
-    \setlength\abovedisplayskip{5pt}
-    \setlength\belowdisplayskip{5pt}
-    \setlength\abovedisplayshortskip{5pt}
-    \setlength\belowdisplayshortskip{5pt}
+    \setlength{\abovedisplayskip}{5pt}
+    \setlength{\belowdisplayskip}{5pt}
+    \setlength{\abovedisplayshortskip}{5pt}
+    \setlength{\belowdisplayshortskip}{5pt}
 }
 
 %%نشان دادن تصاویر در بالای صفحه خالی
@@ -204,7 +204,7 @@
 \newcommand{\frontcover}{
     \AddToHookNext{shipout/background}{
         \put (0,-\paperheight){
-            \includegraphics[width=\paperwidth,height=\paperheight,trim=0 0 102mm 0]{images/cover.jpg}
+            \includegraphics[width=\paperwidth,height=\paperheight,trim=0 0 102mm 0]{assets/cover.jpg}
         }
     }
     \blankpage
@@ -212,7 +212,7 @@
 \newcommand{\backcover}{
     \AddToHookNext{shipout/background}{
         \put (0,-\paperheight){
-            \includegraphics[width=\paperwidth,height=\paperheight,trim=115mm 0 0 0]{images/cover.jpg}
+            \includegraphics[width=\paperwidth,height=\paperheight,trim=115mm 0 0 0]{assets/cover.jpg}
         }
     }
     \blankpage

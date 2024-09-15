@@ -46,20 +46,21 @@
 
 \pagenumbering{alph}
 \setcounter{page}{8}
-
 \pagestyle{plain}
+
 \include{frontmatter/abstract}
 \tableofcontents
 \clearpage
 \listoftables
 \clearpage
 \listoffigures
+\clearpage
 \include{frontmatter/abbreviations}
 
 \pagenumbering{arabic}
 \setcounter{page}{1}
-
 \pagestyle{fancy}
+
 \include{chapters/chapter1}
 \include{chapters/chapter2}
 \include{chapters/chapter3}
@@ -70,16 +71,17 @@
 {
     \singlespacing
     \addcontentsline{toc}{chapter}{\refname}
-    % \bibliography{references}
-    \include{references}
+    \bibliographystyle{unsrt-fa}
+    \bibliography{references}
+    % \include{references}
 }
 \include{chapters/appendix}
 
-\newgeometry{margin=20mm, left=25mm, asymmetric}
+\newgeometry{margin=20mm,left=25mm,asymmetric}
 \pagestyle{empty}
+
 \include{backmatter/abstract}
 \include{backmatter/referees}
-\blankpage
 \include{backmatter/titlepage}
 \backcover
 
