@@ -2,40 +2,41 @@
 
 \usepackage{shirazu}
 
-\name{نام و نام‌خانوادگی}{Name}
-\studentnumber{12345678}
-\university{دانشگاه شیراز}{Shiraz University}
-\department{نام دانشکده}{Department}
-\field{رشته تحصیلی}{Field}
-\degree{مقطع تحصیلی}{Degree}
+\Name{نام و نام‌خانوادگی}{Name}
+\StudentNumber{12345678}
+\University{دانشگاه شیراز}{Shiraz University}
+\School{نام دانشکده}{School of ...}
+\Department{نام بخش}{Department of ...}
+\Field{رشته تحصیلی}{Field}
+\Degree{کارشناسی ارشد}{Master of Science/Master of Arts}{M.Sc./M.A.}
 
-\thesistitle{عنوان}{Title}
-\thesistype{پایان‌نامه/رساله}{Thesis/Dissertion}
-\thesisdate{مهر ۱۴۰۲}{September 2023}
-\thesisgrade{عالی}{Excellent}
-\defensedate{1402/1/1}{1/1/2023}
+\ThesisTitle{عنوان}{Title}
+\ThesisType{پایان‌نامه}{Thesis}
+\ThesisDate{مهر ۱۴۰۳}{September 2024}
+\ThesisGrade{عالی}{Excellent}
+\DefenseDate{1403/07/01}{22/09/2024}
 
-\supervisor{نام استاد راهنما}{Supervisor Name (Ph.D.)}{S. Name (Ph.D.)}
-\supervisortitle{مرتبه علمی}{Prof.}
-\supervisordepartment{دانشکده}{Department}
+\Supervisor{نام استاد راهنما}{Supervisor Name}{S. Name}
+\SupervisorTitle{مرتبه علمی}{Prof.}
+\SupervisorDepartment{دانشکده}{Department}
 
-\advisor{نام استاد مشاور}{Advisor Name (Ph.D.)}
-\advisortitle{مرتبه علمی}{Prof.}
-\advisordepartment{دانشکده}{Department}
+\Advisor{نام استاد مشاور}{Advisor Name}
+\AdvisorTitle{مرتبه علمی}{Prof.}
+\AdvisorDepartment{دانشکده}{Department}
 
-\referee{نام داور}{Referee (Ph.D.)}
-\refereetitle{مرتبه علمی}{Prof.}
-\refereedepartment{دانشکده}{Department}
+\Referee{نام داور}{Referee}
+\RefereeTitle{مرتبه علمی}{Prof.}
+\RefereeDepartment{دانشکده}{Department}
 
-\externalreferee{نام داور}{Referee (Ph.D.)}
-\externalrefereetitle{مرتبه علمی}{Prof.}
-\externalrefereedepartment{دانشکده}{Department}
-\externalrefereeuniversity{دانشگاه}{University}
+\ExternalReferee{نام داور}{Referee}
+\ExternalRefereeTitle{مرتبه علمی}{Prof.}
+\ExternalRefereeDepartment{دانشکده}{Department}
+\ExternalRefereeUniversity{دانشگاه}{University}
 
 \begin{document}
 
 \pagestyle{empty}
-\frontcover
+\include{frontmatter/cover}
 \include{frontmatter/titlepage}
 \blankpage
 \bismillah
@@ -68,13 +69,7 @@
 \include{chapters/chapter5}
 
 \pagestyle{plain}
-{
-    \singlespacing
-    \addcontentsline{toc}{chapter}{\refname}
-    \bibliographystyle{unsrt-fa}
-    \bibliography{references}
-    % \include{references}
-}
+\include{references}
 \include{chapters/appendix}
 
 \newgeometry{margin=20mm,left=25mm,asymmetric}
@@ -82,7 +77,8 @@
 
 \include{backmatter/abstract}
 \include{backmatter/referees}
+\blankpage
 \include{backmatter/titlepage}
-\backcover
+\include{backmatter/cover}
 
 \end{document}

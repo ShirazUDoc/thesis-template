@@ -1,0 +1,33 @@
+\newgeometry{margin=0pt}
+
+\AddToHookNext{shipout/background}{
+    \put (0,-\paperheight){
+        \includegraphics[width=\paperwidth,height=\paperheight]{assets/back_cover}
+    }
+}
+
+\begin{latin}
+    \fontsize{13.2pt}{15.8pt}\selectfont
+
+    \begin{textblock*}{12cm}(1.5cm,5cm)
+        \textcolor{white}{\textbf{{\LatinDegreeAbbr} {\LatinType}}}
+
+        \vspace{\baselineskip}
+        \textcolor{white}{\large \textbf{\LatinTitle}}
+
+        \vspace{\baselineskip}
+        \textcolor{white}{\textbf{\LatinName}}
+    \end{textblock*}
+
+    \begin{textblock*}{12cm}(1.5cm,17cm)
+        \textcolor{white}{Supervised by \\ \textbf{{\LatinSupervisor}, PhD}}
+    \end{textblock*}
+
+    \begin{textblock*}{12cm}(1.5cm,20.5cm)
+        \textcolor{white}{{\LatinSchool} - {\LatinDepartment}}
+    \end{textblock*}
+
+    \begin{textblock*}{3cm}(12cm,22cm)
+        \textcolor{BlueGray}{\normalsize \textbf{\LatinDate}}
+    \end{textblock*}
+\end{latin}

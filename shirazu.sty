@@ -1,13 +1,15 @@
 \RequirePackage{appendix}
 \RequirePackage{caption}
-\RequirePackage{emptypage}
+\RequirePackage{cite}
+\RequirePackage{contour}
 \RequirePackage{enumitem}
+\RequirePackage{etoolbox}
 \RequirePackage{fancyhdr}
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 \RequirePackage[hidelinks]{hyperref}
-\RequirePackage[numbers,sectionbib,sort&compress]{natbib}
-\RequirePackage{setspace}
+\RequirePackage[onehalfspacing]{setspace}
+\RequirePackage{textpos}
 \RequirePackage{titlesec}
 \RequirePackage{tocloft}
 \RequirePackage{xepersian}
@@ -15,13 +17,16 @@
 
 \SepMark{-}
 \urlstyle{same}
+\definecolor{BlueGray}{RGB}{31,73,125}
 
 \AtBeginDocument{
     \renewcommand{\refname}{منابع}
-    \renewcommand{\bibname}{\refname\vspace{\baselineskip}}
+    \renewcommand{\bibname}{\refname}
     \renewcommand{\listfigurename}{فهرست شکل‌ها}
     \renewcommand{\listtablename}{فهرست جدول‌ها}
 }
+
+\renewcommand{\cleardoublepage}{\clearpage}
 
 %% تنظیم فاصله ی حاشیه صفحات
 \geometry{paperheight=235mm,paperwidth=165mm,margin=20mm,right=25mm,marginparsep=0pt,headsep=5pt,asymmetric,includefoot}
@@ -37,7 +42,6 @@
 %% تنظیم پاراگراف بندی ها
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
-\onehalfspacing
 
 %% صفحه خالی
 \newcommand{\blankpage}{
@@ -53,7 +57,7 @@
     \thispagestyle{empty}
     \vspace*{\fill}
     \begin{center}
-        \includegraphics[width=0.8\textwidth]{assets/bismillah.jpg}
+        \includegraphics[width=0.8\textwidth]{assets/bismillah}
     \end{center}
     \vspace*{\fill}
 }
@@ -132,32 +136,38 @@
 \titlespacing*{\section}{0pt}{\baselineskip}{0pt}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection\@SepMark~}{0pt}{}
 \titlespacing*{\subsection}{0pt}{\baselineskip}{0pt}
+\titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection\@SepMark~}{0pt}{}
+\titlespacing*{\subsubsection}{0pt}{\baselineskip}{0pt}
 
 %% تنظیمات هدر و فوتر
 \fancyhf{}
 \fancyfoot[C]{\thepage}
-\fancyhead[R]{\textbf{\persiantitle}}
+\fancyhead[R]{\textbf{\PersianTitle}}
 \setlength{\headheight}{16pt}
 \addtolength{\topmargin}{-2pt}
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername~\tartibi{chapter}:~#1}{}}
 
 %% تنظیمات پیوست
 \renewcommand{\appendixtocname}{پیوست‌ها}
-\newcommand{\app}[1]{\protect\section[\hspace{1.5em}#1]{#1}}
+\newcommand{\app}[1]{\clearpage\protect\section[\hspace{1.5em}#1]{#1}}
 \AtBeginEnvironment{appendices}{\renewcommand{\thesection}{پیوست~\arabic{section}}}
 
 %% لیست نشانه های اختصاری
 \newcommand{\gloss}[2]{{#1}~\dotfill~{#2}\\}
 
-%% تنظیم فاصله خطوط منابع
+%% تنظیمات منابع
+\renewcommand{\citedash}{-}
+\patchcmd{\thebibliography}{\chapter}{\section}{}{}
 \let\originalthebibliography\thebibliography
 \renewcommand{\thebibliography}[1]{
     \originalthebibliography{#1}
+    \addcontentsline{toc}{chapter}{\refname}
+    \setlength{\itemsep}{0pt}
     \setlength{\parskip}{0pt}
-    \setlength{\itemsep}{0pt plus 0.3ex}
+    \singlespacing
 }
 
-%% تنضیم فاصله معادلات ریاضی
+%% تنظیم فاصله معادلات ریاضی
 \AtBeginDocument{
     \setlength{\abovedisplayskip}{5pt}
     \setlength{\belowdisplayskip}{5pt}
@@ -165,55 +175,38 @@
     \setlength{\belowdisplayshortskip}{5pt}
 }
 
-%%نشان دادن تصاویر در بالای صفحه خالی
-\setlength{\@fptop}{0pt}
+%% نشان دادن تصاویر در بالای صفحه خالی
+\raggedbottom
 
 %% کامندهای مربوط به اطلاعات پایان نامه
-\newcommand{\name}[2]{\newcommand{\persianname}{#1}\newcommand{\latinname}{#2}}
-\newcommand{\studentnumber}[1]{\newcommand{\persianstudentnumber}{#1}\newcommand{\latinstudentnumber}{#1}}
+\newcommand{\Name}[2]{\newcommand{\PersianName}{#1}\newcommand{\LatinName}{#2}}
+\newcommand{\StudentNumber}[1]{\newcommand{\PersianStudentNumber}{#1}\newcommand{\LatinStudentNumber}{#1}}
 
-\newcommand{\university}[2]{\newcommand{\persianuniversity}{#1}\newcommand{\latinuniversity}{#2}}
-\newcommand{\department}[2]{\newcommand{\persiandepartment}{#1}\newcommand{\latindepartment}{#2}}
-\newcommand{\field}[2]{\newcommand{\persianfield}{#1}\newcommand{\latinfield}{#2}}
-\newcommand{\degree}[2]{\newcommand{\persiandegree}{#1}\newcommand{\latindegree}{#2}}
+\newcommand{\University}[2]{\newcommand{\PersianUniversity}{#1}\newcommand{\LatinUniversity}{#2}}
+\newcommand{\School}[2]{\newcommand{\PersianSchool}{#1}\newcommand{\LatinSchool}{#2}}
+\newcommand{\Department}[2]{\newcommand{\PersianDepartment}{#1}\newcommand{\LatinDepartment}{#2}}
+\newcommand{\Field}[2]{\newcommand{\PersianField}{#1}\newcommand{\LatinField}{#2}}
+\newcommand{\Degree}[3]{\newcommand{\PersianDegree}{#1}\newcommand{\LatinDegree}{#2}\newcommand{\LatinDegreeAbbr}{#3}}
 
-\newcommand{\thesistitle}[2]{\newcommand{\persiantitle}{#1}\newcommand{\latintitle}{#2}}
-\newcommand{\thesisdate}[2]{\newcommand{\persiandate}{#1}\newcommand{\latindate}{#2}}
-\newcommand{\thesisgrade}[2]{\newcommand{\persiangrade}{#1}\newcommand{\latingrade}{#2}}
-\newcommand{\thesistype}[2]{\newcommand{\persiantype}{#1}\newcommand{\latintype}{#2}}
-\newcommand{\defensedate}[2]{\newcommand{\persiandefensedate}{#1}\newcommand{\latindefensedate}{#2}}
+\newcommand{\ThesisTitle}[2]{\newcommand{\PersianTitle}{#1}\newcommand{\LatinTitle}{#2}}
+\newcommand{\ThesisDate}[2]{\newcommand{\PersianDate}{#1}\newcommand{\LatinDate}{#2}}
+\newcommand{\ThesisGrade}[2]{\newcommand{\PersianGrade}{#1}\newcommand{\LatinGrade}{#2}}
+\newcommand{\ThesisType}[2]{\newcommand{\PersianType}{#1}\newcommand{\LatinType}{#2}}
+\newcommand{\DefenseDate}[2]{\newcommand{\PersianDefenseDate}{#1}\newcommand{\LatinDefenseDate}{#2}}
 
-\newcommand{\supervisor}[3]{\newcommand{\persiansupervisor}{#1}\newcommand{\latinsupervisor}{#2}\newcommand{\latinsupervisorabbr}{#3}}
-\newcommand{\supervisortitle}[2]{\newcommand{\persiansupervisortitle}{#1}\newcommand{\latinsupervisortitle}{#2}}
-\newcommand{\supervisordepartment}[2]{\newcommand{\persiansupervisordepartment}{#1}\newcommand{\latinsupervisordepartment}{#2}}
+\newcommand{\Supervisor}[3]{\newcommand{\PersianSupervisor}{#1}\newcommand{\LatinSupervisor}{#2}\newcommand{\LatinSupervisorAbbr}{#3}}
+\newcommand{\SupervisorTitle}[2]{\newcommand{\PersianSupervisorTitle}{#1}\newcommand{\LatinSupervisorTitle}{#2}}
+\newcommand{\SupervisorDepartment}[2]{\newcommand{\PersianSupervisorDepartment}{#1}\newcommand{\LatinSupervisorDepartment}{#2}}
 
-\newcommand{\advisor}[2]{\newcommand{\persianadvisor}{#1}\newcommand{\latinadvisor}{#2}}
-\newcommand{\advisortitle}[2]{\newcommand{\persianadvisortitle}{#1}\newcommand{\latinadvisortitle}{#2}}
-\newcommand{\advisordepartment}[2]{\newcommand{\persianadvisordepartment}{#1}\newcommand{\latinadvisordepartment}{#2}}
+\newcommand{\Advisor}[2]{\newcommand{\PersianAdvisor}{#1}\newcommand{\LatinAdvisor}{#2}}
+\newcommand{\AdvisorTitle}[2]{\newcommand{\PersianAdvisorTitle}{#1}\newcommand{\LatinAdvisorTitle}{#2}}
+\newcommand{\AdvisorDepartment}[2]{\newcommand{\PersianAdvisorDepartment}{#1}\newcommand{\LatinAdvisorDepartment}{#2}}
 
-\newcommand{\referee}[2]{\newcommand{\persianreferee}{#1}\newcommand{\latinreferee}{#2}}
-\newcommand{\refereetitle}[2]{\newcommand{\persianrefereetitle}{#1}\newcommand{\latinrefereetitle}{#2}}
-\newcommand{\refereedepartment}[2]{\newcommand{\persianrefereedepartment}{#1}\newcommand{\latinrefereedepartment}{#2}}
+\newcommand{\Referee}[2]{\newcommand{\PersianReferee}{#1}\newcommand{\LatinReferee}{#2}}
+\newcommand{\RefereeTitle}[2]{\newcommand{\PersianRefereeTitle}{#1}\newcommand{\LatinRefereeTitle}{#2}}
+\newcommand{\RefereeDepartment}[2]{\newcommand{\PersianRefereeDepartment}{#1}\newcommand{\LatinRefereeDepartment}{#2}}
 
-\newcommand{\externalreferee}[2]{\newcommand{\persianexternalreferee}{#1}\newcommand{\latinexternalreferee}{#2}}
-\newcommand{\externalrefereetitle}[2]{\newcommand{\persianexternalrefereetitle}{#1}\newcommand{\latinexternalrefereetitle}{#2}}
-\newcommand{\externalrefereedepartment}[2]{\newcommand{\persianexternalrefereedepartment}{#1}\newcommand{\latinexternalrefereedepartment}{#2}}
-\newcommand{\externalrefereeuniversity}[2]{\newcommand{\persianexternalrefereeuniversity}{#1}\newcommand{\latinexternalrefereeuniversity}{#2}}
-
-%% جلد فارسی و انگلیسی
-\newcommand{\frontcover}{
-    \AddToHookNext{shipout/background}{
-        \put (0,-\paperheight){
-            \includegraphics[width=\paperwidth,height=\paperheight,trim=0 0 102mm 0]{assets/cover.jpg}
-        }
-    }
-    \blankpage
-}
-\newcommand{\backcover}{
-    \AddToHookNext{shipout/background}{
-        \put (0,-\paperheight){
-            \includegraphics[width=\paperwidth,height=\paperheight,trim=115mm 0 0 0]{assets/cover.jpg}
-        }
-    }
-    \blankpage
-}
+\newcommand{\ExternalReferee}[2]{\newcommand{\PersianExternalReferee}{#1}\newcommand{\LatinExternalReferee}{#2}}
+\newcommand{\ExternalRefereeTitle}[2]{\newcommand{\PersianExternalRefereeTitle}{#1}\newcommand{\LatinExternalRefereeTitle}{#2}}
+\newcommand{\ExternalRefereeDepartment}[2]{\newcommand{\PersianExternalRefereeDepartment}{#1}\newcommand{\LatinExternalRefereeDepartment}{#2}}
+\newcommand{\ExternalRefereeUniversity}[2]{\newcommand{\PersianExternalRefereeUniversity}{#1}\newcommand{\LatinExternalRefereeUniversity}{#2}}

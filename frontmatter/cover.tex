@@ -1,0 +1,39 @@
+\newgeometry{margin=0pt}
+
+\AddToHookNext{shipout/background}{
+    \put (0,-\paperheight){
+        \includegraphics[width=\paperwidth,height=\paperheight]{assets/front_cover}
+    }
+}
+
+\begin{textblock*}{12.5cm}(1cm,4.5cm)
+    \textcolor{white}{\small \textbf{{\PersianType} {\PersianDegree}}}
+
+    \vspace{\baselineskip}
+    \textcolor{white}{\textbf{\PersianTitle}}
+
+    \vspace{\baselineskip}
+    \textcolor{white}{\textbf{\PersianName}}
+\end{textblock*}
+
+\begin{textblock*}{12.7cm}(1cm,8cm)
+    \includegraphics[width=12.7cm, height=8cm]{assets/cover}
+\end{textblock*}
+
+\begin{textblock*}{12.5cm}(1cm,17cm)
+    \textcolor{white}{استاد راهنما: \\ \textbf{\PersianSupervisor}}
+\end{textblock*}
+
+\begin{textblock*}{12.5cm}(1cm,20.5cm)
+    \textcolor{white}{{\PersianSchool} - {\PersianDepartment}}
+\end{textblock*}
+
+\begin{textblock*}{2.5cm}(1cm,22cm)
+    \contour{BlueGray}{\footnotesize \textbf{\PersianDate}}
+\end{textblock*}
+
+\begin{textblock*}{14.7cm}(1cm,1cm)
+    \rotatebox{90}{\contour{BlueGray}{\textbf{{\PersianType} {\PersianDegree} \hspace{4cm} {\PersianTitle} \hspace{4cm} {\PersianName} \hspace{1cm} ۱۴۰۳ \hspace{1cm} {\PersianUniversity}}}}
+\end{textblock*}
+
+\restoregeometry
