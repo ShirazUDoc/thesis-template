@@ -1,4 +1,7 @@
+\ProvidesPackage{shirazu}
+
 \RequirePackage{appendix}
+\RequirePackage{calc}
 \RequirePackage{caption}
 \RequirePackage{cite}
 \RequirePackage{contour}
@@ -19,34 +22,45 @@
 \SepMark{-}
 \urlstyle{same}
 \definecolor{BlueGray}{RGB}{31,73,125}
-\renewcommand{\TruncateMarker}{~...}
+
+\bidi@patchcmd{\@alph}{آ}{الف}{}{}
+\bidi@patchcmd{\@Alph}{آ}{الف}{}{}
 
 \AtBeginDocument{
     \renewcommand{\refname}{منابع}
     \renewcommand{\bibname}{\refname}
     \renewcommand{\listfigurename}{فهرست شکل‌ها}
     \renewcommand{\listtablename}{فهرست جدول‌ها}
+
+    %% تنظیم فاصله معادلات ریاضی
+    \setlength{\abovedisplayskip}{5pt}
+    \setlength{\belowdisplayskip}{5pt}
+    \setlength{\abovedisplayshortskip}{5pt}
+    \setlength{\belowdisplayshortskip}{5pt}
 }
 
 \renewcommand{\cleardoublepage}{\clearpage}
 
+\newcommand{\scalemath}[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+
 %% تنظیم فاصله ی حاشیه صفحات
 \geometry{paperheight=235mm,paperwidth=165mm,margin=20mm,right=25mm,marginparsep=0pt,headsep=5pt,asymmetric,includefoot}
 
-%% تنضیمات مربوط به فونت
+%% تنظیمات مربوط به فونت
 \settextfont[Scale=1]{B Nazanin}
 \setlatintextfont[Scale=0.83]{Times New Roman}
 \DeclareMathSizes{12}{10}{7}{6}
 \DeclareMathSizes{10.95}{9}{7}{6}
 \DeclareMathSizes{10}{8}{7}{6}
 \setlength{\footnotesep}{0pt}
+\renewcommand{\footnotesize}{\fontsize{9pt}{12pt}\selectfont}
 
 %% تنظیم پاراگراف بندی ها
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0pt}
 
 %% صفحه خالی
-\newcommand{\blankpage}{
+\newcommand{\BlankPage}{
     \clearpage
     \shipout\null
     \thispagestyle{empty}
@@ -54,7 +68,7 @@
 }
 
 %% صفحه بسم الله
-\newcommand{\bismillah}{
+\newcommand{\BismillahPage}{
     \clearpage
     \thispagestyle{empty}
     \vspace*{\fill}
@@ -65,26 +79,18 @@
 }
 
 %% سایز عنوان فهرست ها
-\renewcommand{\cfttoctitlefont}{\hfil\bfseries}
-\renewcommand{\cftaftertoctitle}{\vspace{\baselineskip}}
-\setlength{\cftaftertoctitleskip}{0pt}
-\setlength{\cftbeforetoctitleskip}{-1.55em}
-\addtocontents{toc}{\textbf{عنوان}\hfill\textbf{صفحه}\par}
-
-\renewcommand{\cftlottitlefont}{\hfil\bfseries}
-\renewcommand{\cftafterlottitle}{\vspace{\baselineskip}}
-\setlength{\cftafterlottitleskip}{0pt}
-\setlength{\cftbeforelottitleskip}{-1.55em}
-\addtocontents{lot}{\textbf{عنوان}\hfill\textbf{صفحه}\vspace{0.5\baselineskip}\par}
-
-\renewcommand{\cftloftitlefont}{\hfil\bfseries}
-\renewcommand{\cftafterloftitle}{\vspace{\baselineskip}}
-\setlength{\cftafterloftitleskip}{0pt}
-\setlength{\cftbeforeloftitleskip}{-1.55em}
-\addtocontents{lof}{\textbf{عنوان}\hfill\textbf{صفحه}\vspace{0.5\baselineskip}\par}
+\newcommand{\shirazu@listfront}[2]{
+    \csdef{cft#1titlefont}{\hfil\bfseries}
+    \csdef{cftafter#1title}{\vspace{\baselineskip}}
+    \setlength{\csname cftafter#1titleskip\endcsname}{0pt}
+    \setlength{\csname cftbefore#1titleskip\endcsname}{-1.55em}
+    \addtocontents{#1}{\textbf{عنوان}\hfill\textbf{صفحه}#2\par}
+}
+\shirazu@listfront{toc}{}
+\shirazu@listfront{lot}{\vspace{0.5\baselineskip}}
+\shirazu@listfront{lof}{\vspace{0.5\baselineskip}}
 
 %% دستورات اضافه کردن کلمه فصل به ابتدای شماره فصل در فهرست
-\let\original@chapter\@chapter
 \def\@chapter[#1]#2{
     \if@mainmatter
         \refstepcounter{chapter}
@@ -102,11 +108,8 @@
 }
 
 %% استفاده از خط فاصله به جای نقطه در شماره گذاری سکشن ها
-\renewcommand{\cftsecaftersnum}{\@SepMark}
-\renewcommand{\cftsubsecaftersnum}{\@SepMark}
-\renewcommand{\cftsubsubsecaftersnum}{\@SepMark}
-\renewcommand{\cftfigaftersnum}{\@SepMark}
-\renewcommand{\cfttabaftersnum}{\@SepMark}
+\newcommand{\shirazu@setaftersnum}[1]{\csdef{cft#1aftersnum}{\@SepMark}}
+\forcsvlist{\shirazu@setaftersnum}{sec,subsec,subsubsec,fig,tab}
 
 %% افزودن کلمه شکل به اول موارد موجود در لیست تصاویر و جداول
 \renewcommand{\@tocrmarg}{1.55em}
@@ -120,7 +123,9 @@
 \addtolength{\cftfignumwidth}{2em}
 
 %% نمایش خط فاصله در کپشن ها و لیست ها
-\setlist{left=0pt,nosep}
+\setlist{left=0pt,nosep,align=left}
+\setlist[enumerate]{label=\arabic*-}
+\setlist[itemize]{label=-}
 \DeclareCaptionLabelSeparator{dash}{\@SepMark~}
 \captionsetup{font=footnotesize,labelsep=dash}
 
@@ -130,10 +135,8 @@
 \renewcommand{\cftchapdotsep}{\cftdot}
 
 %% وسط چین شماره گذاری فصل و نحوه نمایش آن
-\AtBeginDocument{
-    \titleformat{\chapter}[display]{\fontsize{16pt}{19pt}\selectfont\bfseries\centering}{\chaptername~\tartibi{chapter}}{24pt}{\thispagestyle{empty}}
-    \titlespacing*{\chapter}{0pt}{90pt}{2\baselineskip}
-}
+\titleformat{\chapter}[display]{\fontsize{16pt}{19pt}\selectfont\bfseries\centering}{\chaptername~\tartibi{chapter}}{24pt}{\thispagestyle{empty}}
+\titlespacing*{\chapter}{0pt}{90pt}{2\baselineskip}
 
 %% تنظیم فونت سکشن ها
 \titleformat{\section}{\normalsize\bfseries}{\thesection\@SepMark~}{0pt}{}
@@ -146,7 +149,7 @@
 %% تنظیمات هدر و فوتر
 \fancyhf{}
 \fancyfoot[C]{\thepage}
-\fancyhead[R]{\textbf{\truncate{12cm}{\PersianTitle}}}
+\fancyhead[R]{\textbf{\truncate{12cm}{\PersianThesisTitle}}}
 \setlength{\headheight}{16pt}
 \addtolength{\topmargin}{-2pt}
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername~\tartibi{chapter}:~#1}{}}
@@ -161,59 +164,134 @@
 
 %% تنظیمات منابع
 \renewcommand{\citedash}{-}
-\AtBeginDocument{
-    \patchcmd{\thebibliography}{\chapter}{\section}{}{}
-    \let\originalthebibliography\thebibliography
-    \renewcommand{\thebibliography}[1]{
-        \originalthebibliography{#1}
-        \addcontentsline{toc}{chapter}{\refname}
-        \setlength{\itemsep}{0pt}
-        \setlength{\parskip}{0pt}
-        \singlespacing
-    }
-}
-
-%% تنظیم فاصله معادلات ریاضی
-\AtBeginDocument{
-    \setlength{\abovedisplayskip}{5pt}
-    \setlength{\belowdisplayskip}{5pt}
-    \setlength{\abovedisplayshortskip}{5pt}
-    \setlength{\belowdisplayshortskip}{5pt}
+\patchcmd{\thebibliography}{\chapter}{\section}{}{}
+\let\shirazu@thebibliography\thebibliography
+\renewcommand{\thebibliography}[1]{
+    \shirazu@thebibliography{#1}
+    \addcontentsline{toc}{chapter}{\refname}
+    \setlength{\itemsep}{0pt}
+    \setlength{\parskip}{0pt}
+    \singlespacing
 }
 
 %% نشان دادن تصاویر در بالای صفحه خالی
 \raggedbottom
+\setlength{\@fptop}{0pt}
+
+%% تنظیمات شیرازه
+\renewcommand{\TruncateMarker}{~...}
+\newlength{\shirazu@rest}
+\newlength{\shirazu@titlespace}
+\newsavebox{\shirazu@spinebox}
+\newcommand{\SpineSep}{\hspace{1cm}}
+\newcommand{\SpineLength}{20.5cm}
+\newcommand{\shirazu@spine}[1]{\textbf{{\PersianThesisType} {\PersianDegree} \SpineSep {#1} \SpineSep {\PersianStudentName} \SpineSep {\PersianThesisYear} \SpineSep {\PersianUniversity}}}
+\newcommand{\PrintSpine}{
+    \settowidth{\shirazu@rest}{\shirazu@spine{}}
+    \setlength{\shirazu@titlespace}{\dimexpr \SpineLength - \shirazu@rest\relax}
+    \ifdim\shirazu@titlespace<1cm \setlength{\shirazu@titlespace}{1cm}\fi
+    \typeout{TITLESPACE = \the\shirazu@titlespace, REST = \the\shirazu@rest}
+    \sbox{\shirazu@spinebox}{\color{BlueGray}{\shirazu@spine{\truncate{\shirazu@titlespace}{\PersianThesisTitle}}}}
+    \rotatebox{90}{\contour{BlueGray}{\usebox{\shirazu@spinebox}}}
+}
 
 %% کامندهای مربوط به اطلاعات پایان نامه
-\newcommand{\Name}[2]{\newcommand{\PersianName}{#1}\newcommand{\LatinName}{#2}}
-\newcommand{\StudentNumber}[1]{\newcommand{\PersianStudentNumber}{#1}\newcommand{\LatinStudentNumber}{#1}}
+\newcommand{\shirazu@pair}[1]{\csdef{#1}##1##2{\csdef{Persian#1}{##1}\csdef{Latin#1}{##2}}}
+\forcsvlist{\shirazu@pair}{StudentName,University,School,Department,FieldOfStudy,ThesisTitle,ThesisYear,ThesisMonth,ThesisGrade,ThesisType,DefenseDate}
 
-\newcommand{\University}[2]{\newcommand{\PersianUniversity}{#1}\newcommand{\LatinUniversity}{#2}}
-\newcommand{\School}[2]{\newcommand{\PersianSchool}{#1}\newcommand{\LatinSchool}{#2}}
-\newcommand{\Department}[2]{\newcommand{\PersianDepartment}{#1}\newcommand{\LatinDepartment}{#2}}
-\newcommand{\Field}[2]{\newcommand{\PersianField}{#1}\newcommand{\LatinField}{#2}}
-\newcommand{\Degree}[3]{\newcommand{\PersianDegree}{#1}\newcommand{\LatinDegree}{#2}\newcommand{\LatinDegreeAbbr}{#3}}
+\newcommand{\StudentNumber}[1]{\def\theStudentNumber{#1}}
+\newcommand{\Degree}[3]{\def\PersianDegree{#1}\def\LatinDegree{#2}\def\LatinDegreeAbbr{#3}}
 
-\newcommand{\ThesisTitle}[2]{\newcommand{\PersianTitle}{#1}\newcommand{\LatinTitle}{#2}}
-\newcommand{\ThesisMonth}[2]{\newcommand{\PersianMonth}{#1}\newcommand{\LatinMonth}{#2}}
-\newcommand{\ThesisYear}[2]{\newcommand{\PersianYear}{#1}\newcommand{\LatinYear}{#2}}
-\newcommand{\ThesisGrade}[2]{\newcommand{\PersianGrade}{#1}\newcommand{\LatinGrade}{#2}}
-\newcommand{\ThesisType}[2]{\newcommand{\PersianType}{#1}\newcommand{\LatinType}{#2}}
-\newcommand{\DefenseDate}[2]{\newcommand{\PersianDefenseDate}{#1}\newcommand{\LatinDefenseDate}{#2}}
+\newcommand{\shirazu@push}[2]{\ifcsempty{#1}{\csgdef{#1}{#2}}{\csgappto{#1}{,#2}}}
+\newcommand{\shirazu@declarefield}[2]{
+    \csgdef{Persian#1#2List}{}
+    \csgdef{Latin#1#2List}{}
+    \csdef{#1#2}##1##2{
+        \shirazu@push{Persian#1#2List}{##1}
+        \shirazu@push{Latin#1#2List}{##2}
+    }
+}
+\newcommand{\shirazu@declarerole}[2]{
+    \shirazu@declarefield{#1}{}
+    \forcsvlist{\shirazu@declarefield{#1}}{#2}
+}
 
-\newcommand{\Supervisor}[3]{\newcommand{\PersianSupervisor}{#1}\newcommand{\LatinSupervisor}{#2}\newcommand{\LatinSupervisorAbbr}{#3}}
-\newcommand{\SupervisorTitle}[2]{\newcommand{\PersianSupervisorTitle}{#1}\newcommand{\LatinSupervisorTitle}{#2}}
-\newcommand{\SupervisorDepartment}[2]{\newcommand{\PersianSupervisorDepartment}{#1}\newcommand{\LatinSupervisorDepartment}{#2}}
+\shirazu@declarerole{Supervisor}{Title,Department}
+\shirazu@declarerole{Advisor}{Title,Department}
+\shirazu@declarerole{Examiner}{Title,Department}
+\shirazu@declarerole{ExternalExaminer}{Title,Department,University}
 
-\newcommand{\Advisor}[2]{\newcommand{\PersianAdvisor}{#1}\newcommand{\LatinAdvisor}{#2}}
-\newcommand{\AdvisorTitle}[2]{\newcommand{\PersianAdvisorTitle}{#1}\newcommand{\LatinAdvisorTitle}{#2}}
-\newcommand{\AdvisorDepartment}[2]{\newcommand{\PersianAdvisorDepartment}{#1}\newcommand{\LatinAdvisorDepartment}{#2}}
+\csgdef{LatinSupervisorAbbrList}{}
+\let\shirazu@Supervisor\Supervisor
+\renewcommand{\Supervisor}[3]{
+    \shirazu@Supervisor{#1}{#2}
+    \shirazu@push{LatinSupervisorAbbrList}{#3}
+}
 
-\newcommand{\Referee}[2]{\newcommand{\PersianReferee}{#1}\newcommand{\LatinReferee}{#2}}
-\newcommand{\RefereeTitle}[2]{\newcommand{\PersianRefereeTitle}{#1}\newcommand{\LatinRefereeTitle}{#2}}
-\newcommand{\RefereeDepartment}[2]{\newcommand{\PersianRefereeDepartment}{#1}\newcommand{\LatinRefereeDepartment}{#2}}
+\newcount{\shirazu@n}
+\newcount{\shirazu@i}
 
-\newcommand{\ExternalReferee}[2]{\newcommand{\PersianExternalReferee}{#1}\newcommand{\LatinExternalReferee}{#2}}
-\newcommand{\ExternalRefereeTitle}[2]{\newcommand{\PersianExternalRefereeTitle}{#1}\newcommand{\LatinExternalRefereeTitle}{#2}}
-\newcommand{\ExternalRefereeDepartment}[2]{\newcommand{\PersianExternalRefereeDepartment}{#1}\newcommand{\LatinExternalRefereeDepartment}{#2}}
-\newcommand{\ExternalRefereeUniversity}[2]{\newcommand{\PersianExternalRefereeUniversity}{#1}\newcommand{\LatinExternalRefereeUniversity}{#2}}
+\newcommand{\shirazu@count}[1]{%
+    \expandafter\let\expandafter\shirazu@list\csname #1\endcsname
+    \shirazu@n=0
+    \def\do##1{\advance\shirazu@n 1}%
+    \expandafter\docsvlist\expandafter{\shirazu@list}%
+    \edef\shirazu@total{\the\shirazu@n}%
+}
+\newcommand{\shirazu@nth}[2]{
+    \expandafter\let\expandafter\shirazu@list\csname #1\endcsname
+    \def\shirazu@item{}
+    \shirazu@n=0
+    \def\do##1{
+        \advance\shirazu@n 1
+        \ifnum\shirazu@n=#2 \def\shirazu@item{##1} \fi
+    }
+    \expandafter\docsvlist\expandafter{\shirazu@list}
+}
+
+\newcommand{\shirazu@names}[2]{\expandafter\forcsvlist\expandafter#1\expandafter{#2}}
+\newcommand{\shirazu@name@Persian}[1]{#1\\}
+\newcommand{\shirazu@name@Latin}[1]{#1~(Ph.D.)\\}
+
+\newcommand{\PrintPersianSupervisorsName}{\shirazu@names{\shirazu@name@Persian}{\PersianSupervisorList}}
+\newcommand{\PrintLatinSupervisorsName}{\shirazu@names{\shirazu@name@Latin}{\LatinSupervisorList}}
+
+\newcommand{\shirazu@get}[2]{\ifcsdef{#1List}{\shirazu@nth{#1List}{#2}}{\def\shirazu@item{}}}
+\newcommand{\shirazu@row@Persian}[5]{{#2}، {#3} بخش {#4}\ifblank{#5}{}{،~{#5}} (#1) \dotfill\\}
+\newcommand{\shirazu@row@Latin}[5]{\dotfill\; & {#2} (Ph.D.), {#3} of the Dept. of {#4}\ifblank{#5}{}{, {#5}} (#1)\\}
+\newcommand{\shirazu@collect}[3]{
+    \ifcsdef{#1#2AbbrList}{\shirazu@get{#1#2Abbr}{\the\shirazu@i}}{\shirazu@get{#1#2}{\the\shirazu@i}}
+    \let\shirazu@a\shirazu@item
+    \shirazu@get{#1#2Title}{\the\shirazu@i}
+    \let\shirazu@b\shirazu@item
+    \shirazu@get{#1#2Department}{\the\shirazu@i}
+    \let\shirazu@c\shirazu@item
+    \shirazu@get{#1#2University}{\the\shirazu@i}
+    \let\shirazu@d\shirazu@item
+    \xappto\shirazu@buf{\expandafter\noexpand\csname shirazu@row@#1\endcsname{#3}{\shirazu@a}{\shirazu@b}{\shirazu@c}{\shirazu@d}}
+}
+
+\newcommand{\shirazu@printpeople}[3]{
+    \let\shirazu@buf\empty
+    \shirazu@count{#1#2List}
+    \shirazu@i=0
+    \@whilenum\shirazu@i<\shirazu@total\do{
+        \advance\shirazu@i 1
+        \shirazu@collect{#1}{#2}{#3}
+    }
+    \shirazu@buf
+}
+
+\newcommand{\PrintPersianSupervisors}{\shirazu@printpeople{Persian}{Supervisor}{استاد راهنما}}
+\newcommand{\PrintLatinSupervisors}{\shirazu@printpeople{Latin}{Supervisor}{Supervisor}}
+\newcommand{\PrintPersianAdvisors}{\shirazu@printpeople{Persian}{Advisor}{استاد مشاور}}
+\newcommand{\PrintLatinAdvisors}{\shirazu@printpeople{Latin}{Advisor}{Advisor}}
+\newcommand{\PrintPersianExaminers}{\shirazu@printpeople{Persian}{Examiner}{داور متخصص داخلی}}
+\newcommand{\PrintLatinExaminers}{\shirazu@printpeople{Latin}{Examiner}{Internal Examiner}}
+\newcommand{\PrintPersianExternalExaminers}{\shirazu@printpeople{Persian}{ExternalExaminer}{داور خارج از دانشگاه}}
+\newcommand{\PrintLatinExternalExaminers}{\shirazu@printpeople{Latin}{ExternalExaminer}{External Examiner}}
+
+\newcommand{\PersianSupervisorLabel}{%
+    \shirazu@count{PersianSupervisorList}%
+    \ifnum\shirazu@total>1 {استادان راهنما} \else {استاد راهنما} \fi
+}

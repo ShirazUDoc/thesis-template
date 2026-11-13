@@ -7,21 +7,21 @@
 }
 
 \begin{textblock*}{12.5cm}(1cm,4.5cm)
-    \textcolor{white}{\small \textbf{{\PersianType} {\PersianDegree}}}
+    \textcolor{white}{\small \textbf{{\PersianThesisType} {\PersianDegree}}}
 
     \vspace{\baselineskip}
-    \textcolor{white}{\textbf{\PersianTitle}}
+    \textcolor{white}{\textbf{\PersianThesisTitle}}
 
     \vspace{\baselineskip}
-    \textcolor{white}{\textbf{\PersianName}}
+    \textcolor{white}{\textbf{\PersianStudentName}}
 \end{textblock*}
 
 \begin{textblock*}{12.7cm}(1cm,8cm)
-    \includegraphics[width=12.7cm, height=8cm]{assets/cover}
+    \includegraphics[width=12.7cm,height=8cm]{assets/cover}
 \end{textblock*}
 
 \begin{textblock*}{12.5cm}(1cm,17cm)
-    \textcolor{white}{استاد راهنما: \\ \textbf{\PersianSupervisor}}
+    \textcolor{white}{{\PersianSupervisorLabel}: \\ \textbf{\PrintPersianSupervisorsName}}
 \end{textblock*}
 
 \begin{textblock*}{12.5cm}(1cm,20.5cm)
@@ -29,11 +29,11 @@
 \end{textblock*}
 
 \begin{textblock*}{2.5cm}(1cm,22cm)
-    \contour{BlueGray}{\footnotesize \textbf{{\PersianMonth} {\PersianYear}}}
+    \contour{BlueGray}{\footnotesize \textbf{{\PersianThesisMonth} {\PersianThesisYear}}}
 \end{textblock*}
 
 \begin{textblock*}{14.7cm}(1cm,1cm)
-    \rotatebox{90}{\contour{BlueGray}{\textbf{{\PersianType} {\PersianDegree} \hspace{1cm} \truncate{7.6cm}{\PersianTitle} \hspace{1cm} {\PersianName} \hspace{1cm} {\PersianYear} \hspace{1cm} {\PersianUniversity}}}}
+    \PrintSpine
 \end{textblock*}
 
 \restoregeometry

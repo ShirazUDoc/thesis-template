@@ -1,17 +1,36 @@
+%-------------------------------------------------------------------------------
+%
+% Shiraz University Thesis Template
+%
+% AUTHOR : Mahdi Sarikhani <mahdisarikhani@outlook.com>
+% REPO   : https://github.com/ShirazUDoc/thesis-template
+%
+% BUILD  : latexmk -xelatex -file-line-error main.tex (XeLaTeX only)
+% FONTS  : B Nazanin and Times New Roman must be installed
+%
+% ISSUES : Report on GitHub or by email with your TeX version and OS, the "!"
+%          error lines and package list from main.log, and a minimal main.tex
+%          that still shows the problem.
+%
+%-------------------------------------------------------------------------------
+
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
 \documentclass[12pt]{book}
 
 \usepackage{shirazu}
 
-\Name{نام و نام‌خانوادگی}{Name}
+\StudentName{نام و نام‌خانوادگی}{Name}
 \StudentNumber{12345678}
 \University{دانشگاه شیراز}{Shiraz University}
 \School{نام دانشکده}{School of ...}
 \Department{نام بخش}{Department of ...}
-\Field{رشته تحصیلی}{Field}
-\Degree{کارشناسی ارشد}{Master of Science/Master of Arts}{M.Sc./M.A.}
+\FieldOfStudy{رشته تحصیلی}{Field}
+\Degree{کارشناسی ارشد/دکتری}{Master of Science/Doctor of Philosophy}{M.Sc./Ph.D.}
 
 \ThesisTitle{عنوان}{Title}
-\ThesisType{پایان‌نامه}{Thesis}
+\ThesisType{پایان‌نامه/رساله}{Thesis/Dissertation}
 \ThesisMonth{شهریور}{September}
 \ThesisYear{۱۴۰۳}{2024}
 \ThesisGrade{عالی}{Excellent}
@@ -21,26 +40,30 @@
 \SupervisorTitle{مرتبه علمی}{Prof.}
 \SupervisorDepartment{دانشکده}{Department}
 
+\Supervisor{نام استاد راهنما ۲}{Supervisor 2}{S. Name 2}
+\SupervisorTitle{مرتبه علمی ۲}{Prof. 2}
+\SupervisorDepartment{دانشکده ۲}{Department 2}
+
 \Advisor{نام استاد مشاور}{Advisor}
 \AdvisorTitle{مرتبه علمی}{Prof.}
 \AdvisorDepartment{دانشکده}{Department}
 
-\Referee{نام داور}{Referee}
-\RefereeTitle{مرتبه علمی}{Prof.}
-\RefereeDepartment{دانشکده}{Department}
+\Examiner{نام داور}{Examiner}
+\ExaminerTitle{مرتبه علمی}{Prof.}
+\ExaminerDepartment{دانشکده}{Department}
 
-\ExternalReferee{نام داور}{Referee}
-\ExternalRefereeTitle{مرتبه علمی}{Prof.}
-\ExternalRefereeDepartment{دانشکده}{Department}
-\ExternalRefereeUniversity{دانشگاه}{University}
+\ExternalExaminer{نام داور خارجی}{Ext. Examiner}
+\ExternalExaminerTitle{مرتبه علمی}{Prof.}
+\ExternalExaminerDepartment{دانشکده}{Department}
+\ExternalExaminerUniversity{دانشگاه}{University}
 
 \begin{document}
 
 \pagestyle{empty}
 \include{frontmatter/cover}
 \include{frontmatter/titlepage}
-\blankpage
-\bismillah
+\BlankPage
+\BismillahPage
 \include{frontmatter/authenticity}
 \include{frontmatter/referees}
 \include{frontmatter/dedication}
@@ -76,10 +99,12 @@
 \newgeometry{margin=20mm,left=25mm,asymmetric}
 \pagestyle{empty}
 
-\include{backmatter/abstract}
-\include{backmatter/referees}
-\blankpage
-\include{backmatter/titlepage}
-\include{backmatter/cover}
+\begin{latin}
+    \include{backmatter/abstract}
+    \include{backmatter/referees}
+    \BlankPage
+    \include{backmatter/titlepage}
+    \include{backmatter/cover}
+\end{latin}
 
 \end{document}

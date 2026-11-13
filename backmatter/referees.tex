@@ -1,40 +1,43 @@
-\begin{latin}
-    {
+{
     \centering
     \textbf{In the Name of God}
 
     \vspace{\baselineskip}
-    \textbf{\large \LatinTitle}
+    \textbf{\large \LatinThesisTitle}
 
     \vspace{\baselineskip}
     By \\
-    \textbf{\large \LatinName}
+    \textbf{\large \LatinStudentName}
 
     \vspace{\baselineskip}
-    {\LatinType} \\
+    {\LatinThesisType} \\
     Submitted to Shiraz University in Partial Fulfillment of the Requirements for the Degree of {\LatinDegree} ({\LatinDegreeAbbr})
 
     \vspace{\baselineskip}
     In \\
-    {\LatinField}
+    {\LatinFieldOfStudy}
 
     \vspace{\baselineskip}
     Shiraz University \\
     Shiraz \\
-    Islamic Republic of Iran \par
-    }
+    Islamic Republic of Iran
+    \par
+}
 
-    \vspace{\baselineskip}
-    \textbf{Evaluated and Approved by the {\LatinType} Committee as: {\LatinGrade}}
+\vspace{\baselineskip}
+\textbf{Evaluated and Approved by the {\LatinThesisType} Committee as: {\LatinThesisGrade}}
 
-    \setlength{\tabcolsep}{0pt}
-    \begin{tabular}{p{0.41\textwidth} p{0.59\textwidth}}
-        \dotfill \; & {\LatinSupervisorAbbr} (Ph.D.), {\LatinSupervisorTitle} of the Dept. of {\LatinSupervisorDepartment} (Supervisor)                                                      \\
-        \dotfill \; & {\LatinAdvisor} (Ph.D.), {\LatinAdvisorTitle} of the Dept. of {\LatinAdvisorDepartment} (Advisor)                                                                      \\
-        \dotfill \; & {\LatinExternalReferee} (Ph.D.), {\LatinExternalRefereeTitle} of the Dept. of {\LatinExternalRefereeDepartment}, {\LatinExternalRefereeUniversity} (External Examiner) \\
-        \dotfill \; & {\LatinReferee} (Ph.D.), {\LatinRefereeTitle} of the Dept. of {\LatinRefereeDepartment} (Internal Examiner)
-    \end{tabular}
+\setlength{\tabcolsep}{0pt}
+\begin{tabular}{p{0.41\textwidth} p{0.59\textwidth}}
+    \PrintLatinSupervisors
+    \PrintLatinAdvisors
+    \ifx\LatinExternalExaminerList\empty\else\PrintLatinExternalExaminers\fi
+    \PrintLatinExaminers
+\end{tabular}
 
-    \vspace{\baselineskip}
-    \centerline{{\LatinMonth} {\LatinYear}}
-\end{latin}
+\vspace{\baselineskip}
+{
+    \centering
+    {\LatinThesisMonth} {\LatinThesisYear}
+    \par
+}

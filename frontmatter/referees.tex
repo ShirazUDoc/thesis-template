@@ -1,35 +1,40 @@
 {
-\centering
-\textbf{به نام خدا}
+    \centering
+    \textbf{به نام خدا}
 
-\vspace{\baselineskip}
-\textbf{\PersianTitle}
+    \vspace{\baselineskip}
+    \textbf{\PersianThesisTitle}
 
-\vspace{\baselineskip}
-به کوشش \\
-\textbf{\PersianName}
+    \vspace{\baselineskip}
+    به کوشش \\
+    \textbf{\PersianStudentName}
 
-\vspace{\baselineskip}
-{\PersianType} \\
-ارائه شده به دانشگاه شیراز به عنوان بخشی از فعالیت‌های تحصیلی لازم \\ برای اخذ درجه {\PersianDegree}
+    \vspace{\baselineskip}
+    {\PersianThesisType} \\
+    ارائه شده به دانشگاه شیراز به عنوان بخشی از فعالیت‌های تحصیلی لازم \\ برای اخذ درجه {\PersianDegree}
 
-\vspace{\baselineskip}
-در رشته \\
-{\PersianField}
+    \vspace{\baselineskip}
+    در رشته \\
+    {\PersianFieldOfStudy}
 
-\vspace{\baselineskip}
-دانشگاه شیراز \\
-شیراز \\
-جمهوری اسلامی ایران \par
+    \vspace{\baselineskip}
+    دانشگاه شیراز \\
+    شیراز \\
+    جمهوری اسلامی ایران
+    \par
 }
 
 \vspace{\baselineskip}
-\textbf{ارزیابی کمیته {\PersianType} با درجه: {\PersianGrade}}
+\textbf{ارزیابی کمیته {\PersianThesisType} با درجه: {\PersianThesisGrade}}
 
-{\PersianSupervisor}، {\PersianSupervisorTitle} بخش {\PersianSupervisorDepartment} (استاد راهنما) \dotfill \\
-{\PersianAdvisor}، {\PersianAdvisorTitle} بخش {\PersianAdvisorDepartment} (استاد مشاور) \dotfill \\
-{\PersianExternalReferee}، {\PersianExternalRefereeTitle} بخش {\PersianExternalRefereeDepartment}، {\PersianExternalRefereeUniversity} (داور خارج از دانشگاه) \dotfill \\
-{\PersianReferee}، {\PersianRefereeTitle} بخش {\PersianRefereeDepartment} (داور متخصص داخلی) \dotfill
+\PrintPersianSupervisors
+\PrintPersianAdvisors
+\ifx\PersianExternalExaminerList\empty\else\PrintPersianExternalExaminers\fi
+\PrintPersianExaminers
 
 \vspace{\baselineskip}
-\centerline{{\PersianMonth} {\PersianYear}}
+{
+    \centering
+    {\PersianThesisMonth} {\PersianThesisYear}
+    \par
+}
